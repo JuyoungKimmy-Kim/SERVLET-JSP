@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <a href="/WebBasic/mvc/list">mvc/list</a><br>
+    <a href="/WebBasic/mvc/insert">mvc/insert</a><br>
+    <a href="/WebBasic/mvc2?job=list">mvc2/list</a><br>
+    <a href="/WebBasic/mvc2?job=insert">mvc2/insert</a><br>
+    <hr>
+    <form action="/WebBasic/mvc/insert" method="post">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="checkbox" name="hobby" value="football">축구
+        <input type="checkbox" name="hobby" value="baseball">야구
+        <input type="checkbox" name="hobby" value="basketball">농구
+        <button type="submit">POST 전송</button>
+    </form>   
+    
+     <hr>
+    <form action="/WebBasic/mvc2?job=insert" method="post">
+    	<input type="hidden" name="job" value="insert">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="checkbox" name="hobby" value="football">축구
+        <input type="checkbox" name="hobby" value="baseball">야구
+        <input type="checkbox" name="hobby" value="basketball">농구
+        <button type="submit">POST 전송</button>
+    </form>  
+    
+</body>
+</html>

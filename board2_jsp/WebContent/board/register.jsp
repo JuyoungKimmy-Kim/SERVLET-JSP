@@ -35,7 +35,7 @@
 	
 	try {
 		conn=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ssafyweb?serverTimezone=UTC",
-				"root","0000");
+				"root","1234");
 		StringBuilder sql=new StringBuilder();
 		sql.append("insert into board (user_id, subject, content, hit, register_time) \n");
 		sql.append("values(?,?,?,0, now())");
