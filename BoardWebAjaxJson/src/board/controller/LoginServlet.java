@@ -1,15 +1,17 @@
 package board.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import board.common.DBManager;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import board.dto.UserDto;
 import board.service.LoginService;
 import board.service.LoginServiceImpl;
@@ -43,6 +45,35 @@ public class LoginServlet extends HttpServlet {
 		UserDto userDto=service.login(userEmail, userPassword);
 		
 		System.out.println(userDto);
+		
+		// #3. 성공, 실패에 대한 처리
+		// #3-2. 성공 : session에 사용자 정보 UserDto를 저장
+		// #3-3. 실패 : 로그인 실패 결과를 client에 return (json)
+		
+		if (userDto!=null) {
+			HttpSession session=request.getSession();
+			session.setAttribute("userDto", userDto);
+			
+			//"result" : "success"
+			Gson gson=new Gson();
+			JsonObject jsonObject=new JsonObject();
+			jsonObject.addProperty("result", "success");
+			
+			String jsonStr=gson.toJson(jsonObject);
+			response.getWriter().write(jsonStr);
+			
+			System.out.println("LoginServlet - login success");
+		} else {
+			//"result" : "success"
+			Gson gson=new Gson();
+			JsonObject jsonObject=new JsonObject();
+			jsonObject.addProperty("result", "fail");
+			
+			String jsonStr=gson.toJson(jsonObject);
+			response.getWriter().write(jsonStr);
+			
+			System.out.println("LoginServlet - login fail");
+		}
 	
 	}
 
