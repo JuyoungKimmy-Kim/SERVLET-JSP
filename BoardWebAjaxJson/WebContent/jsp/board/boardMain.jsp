@@ -277,12 +277,12 @@ String contextPath=request.getContextPath();
 				let content=document.querySelector("#content").value;
 				
 				//console.log(title, content)
-				if (title>0 && content>0) {
-					
+				if (title.length>0 && content.length>0) {
+					boardInsert();
 				} else {
 					alert("입력이 올바르지 않습니다!")
 				}
-            }
+			}
 		}
 		
 	      async function boardInsert() {
@@ -304,14 +304,10 @@ String contextPath=request.getContextPath();
 	          if (data.result == "success") { 
 	              alert("등록 성공!");
 	          } else if (data.result == "fail") {
-	            alert("서버 오류!");
+	            alert("등록 실패!");
 	          }
 	        }
 	
 	</script>
-
-
- 
-
   </body>
 </html>
