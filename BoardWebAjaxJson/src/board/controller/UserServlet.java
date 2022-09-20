@@ -1,7 +1,6 @@
 package board.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,42 +8,48 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import board.dto.UserDto;
 import board.service.UserService;
 import board.service.UserServiceImpl;
 
-@WebServlet("/UserServlet")
+@WebServlet("/register")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	UserService userService=UserServiceImpl.getInstance();
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
 		// Client로부터 정보 입력 받음
-		int userSeq=Integer.parseInt(request.getParameter("userSeq"));
 		String userName=request.getParameter("userName");
 		String userPassword=request.getParameter("userPassword");
-		String userEmail=request.getParameter("userEmail");
-		String userProfileImageUrl=request.getParameter("userProfileImageUrl");		
-		Date userRegisterDate=null; //=request.getParameter("userRegisterDate");
+		String userEmail=request.getParameter("userEmail");		
 		
 		// userDto에 정보 등록
 		UserDto userDto=new UserDto();
-		userDto.setUserSeq(userSeq);
+		userDto.setUserName(userName);
 		userDto.setUserPassword(userPassword);
 		userDto.setUserEmail(userEmail);
-		userDto.setUserProfileImageUrl(userProfileImageUrl);
-		userDto.setUserRegisterDate(userRegisterDate);
-		
+
 		// Service로 보내서 등록
-		UserService service=UserServiceImpl.getInstance();
-		service.userRegister(userDto);
-	
-		/*
-		 * 성공, 실패 결과
-		 * 
-		 */
+		int ret=userService.userRegister(userDto);
+		Gson gson=new Gson();
+		JsonObject jsonObject=new JsonObject();
+		
+		if (ret==1) {
+			//성공
+			jsonObject.addProperty("result", "success");
+		} else {
+			//실패
+			jsonObject.addProperty("result", "fail");
+		}
+		String jsonStr=gson.toJson(jsonObject);
+		response.getWriter().write(jsonStr);
 	}
 }

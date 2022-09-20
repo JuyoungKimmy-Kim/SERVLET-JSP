@@ -57,7 +57,7 @@ public class LoginDaoImpl implements LoginDao {
 				userDto.setUserProfileImageUrl(rs.getString("USER_PROFILE_IMAGE_URL"));
 				userDto.setUserRegisterDate(rs.getDate("USER_REGISTER_DATE"));
 				
-				System.out.println(userDto);
+				System.out.println("여기"+userDto);
 				
 			}
 			

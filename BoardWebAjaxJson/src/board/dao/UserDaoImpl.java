@@ -17,34 +17,37 @@ public class UserDaoImpl implements UserDao{
 		return instance;
 	}
 	
+	// 멤버 변수가 하나도 없음 -> thread safe
+	
 	@Override
 	public int userRegister(UserDto userDto) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		
+		int ret=-1;
+		
 		try {
 			con=DBManager.getConnection();
 			StringBuilder sb=new StringBuilder();
 			
-			sb.append("INSERT INTO BOARD.USERS (USER_SEQ, USER_NAME, USER_PASSWORD, USER_EMAIL, USER_PROFILE_IMAGE_URL, USER_REGISTER_DATE)\n")
-			.append("VALUES (?,?,?,?,?,?)");
+			sb.append("INSERT INTO USERS (USER_NAME, USER_PASSWORD, USER_EMAIL, USER_PROFILE_IMAGE_URL, USER_REGISTER_DATE)\n")
+			.append("VALUES (?,?,?,'',now())");
 			
 			pstmt=con.prepareStatement(sb.toString());
-			pstmt.setInt(1, userDto.getUserSeq());
-			pstmt.setString(2, userDto.getUserName());
-			pstmt.setString(3, userDto.getUserPassword());
-			pstmt.setString(4, userDto.getUserEmail());
-			pstmt.setString(5, userDto.getUserProfileImageUrl());
-			//pstmt.setDate(6, userDto.getUserRegisterDate());
-							
+			pstmt.setString(1, userDto.getUserName());
+			pstmt.setString(2, userDto.getUserPassword());
+			pstmt.setString(3, userDto.getUserEmail());
+					
+			ret=pstmt.executeUpdate(); //영향받은 row수 return
+			
 		} catch (Exception e){
 			e.printStackTrace();
 		} finally {
 			DBManager.releaseConnection(rs, pstmt, con);
 		}
 		
-		return 0;
+		return ret;
 	}
 	
 }

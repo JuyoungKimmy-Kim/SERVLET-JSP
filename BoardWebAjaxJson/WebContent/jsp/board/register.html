@@ -1,9 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%
-String contextPath=request.getContextPath();
-%>
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -27,19 +21,6 @@ String contextPath=request.getContextPath();
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
       crossorigin="anonymous"
     ></script>
-
-	<!-- JavaScript -->
-	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-	
-	<!-- CSS -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-	<!-- Default theme -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-	<!-- Semantic UI theme -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
-	<!-- Bootstrap theme -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
-	
 
     <title>Register</title>
   </head>
@@ -207,7 +188,7 @@ String contextPath=request.getContextPath();
         let userEmailValue = document.querySelector("#userEmail").value;
         let userPasswordValue = document.querySelector("#userPassword").value;
 
-        if (document.querySelectorAll("form .is-invalid").length>0) {
+        if (document.querySelectorAll("form .is-invalide").length>0) {
           alert("입력이 올바르지 않습니다.");
         } else {
         register();
@@ -233,14 +214,11 @@ String contextPath=request.getContextPath();
         let response = await fetch("<%=contextPath%>/register", fetchOptions);
         let data = await response.json(); //json => javascript object <= JSON.parse();
 
-        if (data.result == "success") { 
-          
-        	alertify.alert("Welcome!", "회원가입을 축하합니다. 로그인 페이지로 이동합니다.", function () {
-                window.location.href = "<%=contextPath%>/jsp/login.jsp";
-        	})
+        if (data.result == "success") {
+          //login.jsp => boardMain.jsp로 페이지 이동 (새로운 페이지 요청 (html..))
+          window.location.href = "<%=contextPath%>/jsp/login.jsp";
         } else if (data.result == "fail") {
-
-          alert("서버 오류!");
+          alert("등록에 실패하였습니다.");
         }
       }
     </script>
