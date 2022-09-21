@@ -1,15 +1,28 @@
 package board.dto;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class BoardDto {
 	private int boardId;
 	private int userSeq;
+	private String userName;
+	private String userProfileImageUrl;
 	private String title;
 	private String content;
-	private Date regDt;
-	private int readCount;
+	private LocalDateTime regDt;
+	private int readCount; //현재는 처리하지 않음
+	private boolean sameUser; 
+	//글쓴이와 보는 이가 같은 사용자인지 여부
 	
+	public BoardDto () {}
+
+	public BoardDto(int userSeq, String title, String content) {
+		super();
+		this.userSeq = userSeq;
+		this.title = title;
+		this.content = content;
+	}
+
 	public int getBoardId() {
 		return boardId;
 	}
@@ -21,6 +34,22 @@ public class BoardDto {
 	}
 	public void setUserSeq(int userSeq) {
 		this.userSeq = userSeq;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserProfileImageUrl() {
+		return userProfileImageUrl;
+	}
+	public void setUserProfileImageUrl(String userProfileImageUrl) {
+        if( userProfileImageUrl == null || "null".equals(userProfileImageUrl) || "".equals(userProfileImageUrl)) {
+            this.userProfileImageUrl = "/img/noProfile.png";
+        }else {
+            this.userProfileImageUrl = userProfileImageUrl;
+        }
 	}
 	public String getTitle() {
 		return title;
@@ -34,10 +63,10 @@ public class BoardDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegDt() {
+	public LocalDateTime getRegDt() {
 		return regDt;
 	}
-	public void setRegDt(Date regDt) {
+	public void setRegDt(LocalDateTime regDt) {
 		this.regDt = regDt;
 	}
 	public int getReadCount() {
@@ -46,13 +75,17 @@ public class BoardDto {
 	public void setReadCount(int readCount) {
 		this.readCount = readCount;
 	}
+	public boolean isSameUser() {
+		return sameUser;
+	}
+	public void setSameUser(boolean sameUser) {
+		this.sameUser = sameUser;
+	}
 	
 	@Override
 	public String toString() {
-		return "BoardDto [boardId=" + boardId + ", userSeq=" + userSeq + ", title=" + title + ", content=" + content
-				+ ", regDt=" + regDt + ", readCount=" + readCount + "]";
+		return "BoardDto [boardId=" + boardId + ", userSeq=" + userSeq + ", userName=" + userName
+				+ ", userProfileImageUrl=" + userProfileImageUrl + ", title=" + title + ", content=" + content
+				+ ", regDt=" + regDt + ", readCount=" + readCount + ", sameUser=" + sameUser + "]";
 	}
-	
-	
-	
 }
