@@ -13,4 +13,9 @@ public interface BoardDao {
 	int boardListSearchWordTotalCnt(String searchWord);
 	BoardDto boardDetail (int boardId);
 	
+	
+	int boardDelete (int boardId);
+	int boardUpdate (BoardDto boardDto);
+	
+	
 }

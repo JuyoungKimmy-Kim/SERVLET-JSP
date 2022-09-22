@@ -257,5 +257,69 @@ public class BoardDaoImpl implements BoardDao{
 		
 		return boardDto;
 	}
+	//=========================추가=========================
+
+	@Override
+	public int boardDelete(int boardId) {
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		int ret=-1;
+
+		try {
+			con=DBManager.getConnection();
+			StringBuilder sb=new StringBuilder();
+			
+			sb.append(" DELETE FROM BOARD WHERE BOARD_ID=? ");
+
+			pstmt=con.prepareStatement(sb.toString());
+			pstmt.setInt(1, boardId);
+			
+			ret=pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.releaseConnection(rs, pstmt, con);
+		}
+		
+		return ret;
+	}
+	
+	@Override
+	public int boardUpdate(BoardDto boardDto) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		int ret=-1;
+
+		try {
+			con=DBManager.getConnection();
+			StringBuilder sb=new StringBuilder();		
+			sb.append(" UPDATE BOARD SET TITLE=?, CONTENT=? WHERE BOARD_ID=? ");
+
+			pstmt=con.prepareStatement(sb.toString());
+			pstmt.setString(1, boardDto.getTitle());
+			pstmt.setString(2, boardDto.getContent());
+			pstmt.setInt(3, boardDto.getBoardId());
+			
+			ret=pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.releaseConnection(rs, pstmt, con);
+		}
+		
+		return ret;
+	}
+	
+	//=========================추가=========================
+
+
+
 
 }

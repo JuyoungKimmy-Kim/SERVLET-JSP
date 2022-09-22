@@ -43,7 +43,9 @@ public class BoardServlet extends HttpServlet {
 		case "/board/boardMain" : boardMain(request, response); break;
 		case "/board/boardList" : boardList(request, response); break;
 		case "/board/boardListTotalCnt" : boardListTotalCnt(request, response); break;
+		case "/board/boardUpdate" : boardUpdate(request, response); break;
 		case "/board/boardDetail" : boardDetail(request, response); break;
+		case "/board/boardDelete" : boardDelete(request, response); break;
 		case "/board/boardInsert" : boardInsert (request, response); break;
 		
 		}
@@ -115,8 +117,7 @@ public class BoardServlet extends HttpServlet {
 	}
 	
 	
-	
-private void boardDetail(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+	private void boardDetail(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 				
 		System.out.println("================Enter BoardServlet - Detail ====================");
 		
@@ -176,4 +177,57 @@ private void boardDetail(HttpServletRequest request, HttpServletResponse respons
 		response.getWriter().write(jsonStr);
 	}
 	
+	
+	
+	private void boardDelete(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		
+		System.out.println("================Enter BoardServlet - Delete ====================");
+		
+		String strBoardId=request.getParameter("boardId");
+		int boardId=Integer.parseInt(strBoardId);
+		
+		int ret=boardService.boardDelete(boardId);
+		
+		Gson gson=new Gson();
+		JsonObject jsonObject=new JsonObject();
+		
+		if (ret==1) {
+			//성공
+			jsonObject.addProperty("result", "success");
+		} else {
+			//실패
+			jsonObject.addProperty("result", "fail");
+		}
+		String jsonStr=gson.toJson(jsonObject);
+		response.getWriter().write(jsonStr);
+	}
+	
+	private void boardUpdate(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		
+		System.out.println("================Enter BoardServlet - Update ====================");
+		
+		String title=request.getParameter("title");
+		String content=request.getParameter("content");
+		int boardId=Integer.parseInt(request.getParameter("boardId"));
+		
+		BoardDto boardDto=new BoardDto();
+		boardDto.setBoardId(boardId);
+		boardDto.setTitle(title);
+		boardDto.setContent(content);
+		
+		int ret=boardService.boardUpdate(boardDto);
+		
+		Gson gson=new Gson();
+		JsonObject jsonObject=new JsonObject();
+		
+		if (ret==1) {
+			//성공
+			jsonObject.addProperty("result", "success");
+		} else {
+			//실패
+			jsonObject.addProperty("result", "fail");
+		}
+		String jsonStr=gson.toJson(jsonObject);
+		response.getWriter().write(jsonStr);
+	}	
 }

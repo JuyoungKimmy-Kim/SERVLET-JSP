@@ -13,4 +13,9 @@ public interface BoardService {
 	int boardListTotalCnt();
 	int boardListSearchWordTotalCnt(String searchWord);
 	BoardDto boardDetail (int boardId, int userSeq);
+	
+	int boardDelete (int boardId);
+	int boardUpdate (BoardDto boardDto);
+
+	
 }

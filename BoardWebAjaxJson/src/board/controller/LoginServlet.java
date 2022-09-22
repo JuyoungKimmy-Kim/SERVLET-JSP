@@ -17,17 +17,24 @@ import board.service.LoginService;
 import board.service.LoginServiceImpl;
 
 
-@WebServlet("/login")
+@WebServlet({"/login", "/logout"})
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//필요한 작업 수행 (Log, 장바구니...DB 저장)
+		HttpSession session=request.getSession();
+		session.invalidate(); // 무조건!! remove아님
+		//"result" : "success"
+		Gson gson=new Gson();
+		JsonObject jsonObject=new JsonObject();
+		jsonObject.addProperty("result", "success");
 		
-//		Connection con=DBManager.getConnection();
-//		System.out.println(con);
-//		DBManager.releaseConnection(null, null, con);
-		doPost(request, response);
+		String jsonStr=gson.toJson(jsonObject);
+		response.getWriter().write(jsonStr);
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
