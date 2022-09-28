@@ -18,7 +18,7 @@ public class DBManager {
 			Context context=(Context)new InitialContext().lookup("java:comp/env/");
 			
 			// #1-3. Resource중 jdbc/board 에 접근
-			DataSource dataSource=(DataSource)context.lookup("jdbc/board");
+			DataSource dataSource=(DataSource)context.lookup("jdbc/my_house");
 			// --> DataSource == Connection pool
 			con=dataSource.getConnection();
 			

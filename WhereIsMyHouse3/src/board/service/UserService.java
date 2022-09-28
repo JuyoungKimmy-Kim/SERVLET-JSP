@@ -12,7 +12,13 @@ import board.dto.UserDto;
  */
 
 
-public interface LoginService {
+public interface UserService {
 	public UserDto login(String userId, String userPassword);
+	public int userRegister(UserDto userDto);
+	public int modify (UserDto userDto);
+	public int modifyPw (String id,String pw);
+	public int delete (String userId);
+
+	
 }
 

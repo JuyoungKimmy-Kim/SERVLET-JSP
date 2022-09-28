@@ -6,7 +6,7 @@ public class UserDto {
 	private String name;
 	private String address;
 	private String phone;
-	private int permission;
+	private String code;
 	
 	
 	public String getId() {
@@ -39,17 +39,17 @@ public class UserDto {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getPermission() {
-		return permission;
+	public String getCode() {
+		return code;
 	}
-	public void setPermission(int permission) {
-		this.permission = permission;
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 	@Override
 	public String toString() {
 		return "UserDto [id=" + id + ", password=" + password + ", name=" + name + ", address=" + address + ", phone="
-				+ phone + ", permission=" + permission + "]";
+				+ phone + ", code=" + code + "]";
 	}
 	
 	

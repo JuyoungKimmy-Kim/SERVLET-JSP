@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	String contextPath = request.getContextPath();
-%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,56 +11,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
-
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-	integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-	crossorigin="anonymous"></script>
-
-<!-- JavaScript -->
-<script
-	src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
-<!-- CSS -->
-<link rel="stylesheet"
-	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
-<!-- Default theme -->
-<link rel="stylesheet"
-	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
-<!-- Semantic UI theme -->
-<link rel="stylesheet"
-	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
-<!-- Bootstrap theme -->
-<link rel="stylesheet"
-	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
-
-
-
-
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Trirong" />
-
 <style>
-.navbar-brand, .nav-link active, .row {
+.row {
 	font-family: "Trirong", serif;
 }
 
 #carouselExampleCaptions {
 	height: 30%;
 }
+
 
 .row, footer {
 	font-family: 'Noto Sans KR', sans-serif;
@@ -84,56 +41,13 @@ footer>ul>li {
 	height: 50px;
 	line-height: 50px;
 }
+
 </style>
 </head>
 
 <body>
-	<!-- 상단 navbar start -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Where is my home ? </a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="index.jsp">Home</a></li>
-				</ul>
 
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="apt/aptMain.jsp">아파트 조회</a></li>
-				</ul>
-
-
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="login.jsp" id="login" style="display:">로그인</a></li>
-				</ul>
-
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="login.jsp" id="logout"
-						style="display: none">로그아웃</a></li>
-				</ul>
-			</div>
-
-			<form class="d-flex">
-				<input class="form-control me-2" type="search" id="inputSearchWord"
-					placeholder="아파트 이름으로 검색하기" aria-label="Search" />
-				<button class="btn btn-outline-success" id="btnSearchWord"
-					type="button">Search</button>
-			</form>
-		</div>
-		</div>
-		<br />
-	</nav>
-	<!-- 상단 navbar end -->
-
+<%@ include file="header.jsp" %>   
 
 	<!-- 중앙 Content IMG 시작-->
 	<div id="carouselExampleCaptions" class="carousel slide"
@@ -149,7 +63,7 @@ footer>ul>li {
 		</div>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="../img/home1.png" class="d-block w-100" alt="...">
+				<img src="<%= contextPath %>/img/home1.png" class="d-block w-100" alt="...">
 
 
 				<div class="carousel-caption d-none d-md-block">
@@ -158,14 +72,14 @@ footer>ul>li {
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="../img/home2.png" class="d-block w-100" alt="...">
+				<img src="<%= contextPath %>/img/home2.png" class="d-block w-100" alt="...">
 				<div class="carousel-caption d-none d-md-block">
 					<h5>서울특별시 강남구</h5>
 					<p>Seoul, Gangnam-gu</p>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="../img/home3.png" class="d-block w-100" alt="...">
+				<img src="<%= contextPath %>/img/home3.png" class="d-block w-100" alt="...">
 				<div class="carousel-caption d-none d-md-block">
 					<h5>부산광역시 해운대구</h5>
 					<p>Busan, Haeundae-gu</p>
@@ -185,6 +99,7 @@ footer>ul>li {
 	</div>
 
 	<!--  중앙 Content IMG 종료-->
+
 
 
 	<!-- 아래 왼쪽 공지사항 시작-->
@@ -232,7 +147,7 @@ footer>ul>li {
 			<div class="row">
 				<div class="col-3">
 					<div class="card" style="width: 15rem;">
-						<img src="../img/sub1.png" class="card-img-top" alt="...">
+						<img src="<%= contextPath %>/img/sub1.png" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">
 								<strong>부동산도 이제 온라인</strong>
@@ -244,7 +159,7 @@ footer>ul>li {
 				</div>
 				<div class="col-3">
 					<div class="card" style="width: 15rem;">
-						<img src="../img/sub2.png" class="card-img-top" alt="...">
+						<img src="<%= contextPath %>/img/sub2.png" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">
 								<strong>구해줘 홈즈 앱 출시!</strong>
@@ -256,7 +171,7 @@ footer>ul>li {
 				</div>
 				<div class="col-3">
 					<div class="card" style="width: 15rem;">
-						<img src="../img/sub3.png" class="card-img-top" alt="...">
+						<img src="<%= contextPath %>/img/sub3.png" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">
 								<strong></strong>
@@ -269,5 +184,5 @@ footer>ul>li {
 			</div>
 		</div>
 	</div>
-	<!-- 아래 오른쪽 이미지3개 종료-->
+
 </body>
